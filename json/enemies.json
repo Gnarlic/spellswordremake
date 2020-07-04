@@ -1,0 +1,27 @@
+{"enemies":
+    [{
+        "goblin" : {
+            "health" : 15,
+            "attackPower" : 1,
+            "defensePower" : 1,
+            "speed" : 3
+        }
+    },
+    {
+        "troll" : {
+            "health" : 30,
+            "attackPower" : 4,
+            "defensePower" : 5,
+            "speed" : 0
+        }
+    },
+    {
+        "dragon" : {
+            "health" : 100,
+            "attackPower" : 15,
+            "defensePower" : 10,
+            "speed" : 4
+        }
+    }
+]
+}
