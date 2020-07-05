@@ -4,25 +4,85 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
 
 
 </head>
 
 <body>
+    <div class="bg-info" style="margin:20px">
+        <h1 class="text-center">Spellsword</h1>
+    </div>
     <div class="container">
-        <div>
 
+        <div>
+            <hr />
         </div>
         <div>
-            <hr/>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Player Name</th>
+                        <th>Weapon</th>
+                        <th>Spell</th>
+                        <th>Mana</th>
+                        <th>Health</th>
+                        <th><button id="readyGame" style="color:black">Start!</button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span id="playerName"></span></td>
+                        <td><span id="playerWeapon">
+                                <select name="weapons" id="weaponChoice">
+                                    <option value="sword">Sword</option>
+                                    <option value="axe">Axe</option>
+                                    <option value="spear">Spear</option>
+                                </select>
+                            </span></td>
+                        <td><span id="playerSpell">
+                                <select name="spells" id="spellChoice">
+                                    <option value="fireball">Fireball</option>
+                                    <option value="frostbeam">Frostbeam</option>
+                                    <option value="lightningbolt">Lightningbolt</option>
+                                </select>
+                            </span></td>
+                        <td><span id="banana"></span></td>
+                        <td><span id="playerHealth"></span></td>
+                        <td>
+                            <button id="weaponAttack" style="color:black">Weapon</button>
+                            <button id="spellCast" style="color:black">Spell</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <thead>
+                    <tr>
+                        <th>Enemy Type</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Enemy Health</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span id="enemyType"></span></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><span id="enemyHealth"></span></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    
-    
+
+
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/gameplay.js"></script>/>
+    <script src="js/gameplay.js"></script>
 </body>
 
 </html>

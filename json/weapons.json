@@ -1,0 +1,24 @@
+{
+    "weapon" : {
+            "sword" : {
+                "attackModifier" : 3,
+                "defenseModifier" : 2,
+                "speedModifier" : 3,
+                "level" : 1
+        },
+        
+            "axe" : {
+                "attackModifier" : 5,
+                "defenseModifier" : 0,
+                "speedModifier" : 1,
+                "level" : 1
+            }
+        },
+            "spear" : {
+                "attackModifier" : 2,
+                "defenseModifier" : 1,
+                "speedModifier" : 5,
+                "level" : 1
+            }
+    
+}

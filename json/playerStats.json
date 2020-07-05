@@ -1,10 +1,11 @@
 {
     "player": {
-        "name":"name",
+        "name":"player",
         "health" : 15,
         "attackPower" : 1,
         "defensePower" : 1,
         "mana" : 10,
+        "manaRegen" : 2,
         "speed" : 5,
         "initiativeModifier" : 0,
         "spellPower": 1

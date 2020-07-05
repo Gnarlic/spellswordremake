@@ -1,0 +1,21 @@
+{
+    "spell" :
+        {
+            "fireball" : {
+                "damage" : 5,
+                "effectDuration" : 2,
+                "manaCost" : 4
+            },
+            "frostbeam" : {
+                "damage" : 3,
+                "effectDuration" : 1,
+                "manaCost" : 2
+            },
+            "lightningbolt" : {
+                "damage" : 4,
+                "effectDuration" : 0,
+                "manaCost" : 3
+            }
+        }
+        
+}
