@@ -111,14 +111,38 @@ $(document).ready(function () {
          weapons.spear.attackModifier);
          $("#enemyHealth").text(enemy.currentHealth);
         } else {
-            alert("Please choose a weapon to attack with");
+            alert("Please choose a weapon to attack with first");
         }
         if (enemy.currentHealth <= 0) {
             $("#enemyHealth").text("0");
             alert("You defeated the "+enemy.name);
         }
+        $("#statusDiv").addClass("bg-success");
+        $("#statusBar").text("Success!");
 
-    })
+    });
+
+    $("#spellCast").click(function () {
+        if ($("#spellChoice").val() == "fireball") {
+            enemy.currentHealth = enemy.currentHealth -
+            (playerStats.player.attackPower + spells.fireball.damage);
+            $("#enemyHealth").text(enemy.currentHealth);
+        } else if ($("#spellChoice").val() == "frostbeam") {
+            enemy.currentHealth = enemy.currentHealth -
+            (playerStats.player.attackPower + spells.frostbeam.damage);
+            $("#enemyHealth").text(enemy.currentHealth);
+        } else if ($("#spellChoice").val() == "lightningbolt") {
+            enemy.currentHealth = enemy.currentHealth -
+            (playerStats.player.attackPower + spells.lightningBolt.damage);
+            $("#enemyHealth").text(enemy.currentHealth);
+        } else {
+            alert("Please choose a spell to attack with first");
+        }
+        if (enemy.currentHealth <= 0) {
+            $("#enemyHealth").text("0");
+            alert("You defeated the "+enemy.name);
+        }
+    });
     
     function setUp () {
         var selectEnemy = Math.floor((Math.random() * 3));
