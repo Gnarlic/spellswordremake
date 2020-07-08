@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height:100%">
 <title>Spellsword</title>
 
 <head>
@@ -9,7 +9,7 @@
 
 </head>
 
-<body>
+<body style="height:100%">
     <div class="bg-info" style="margin:20px">
         <h1 class="text-center">Spellsword</h1>
     </div>
@@ -18,12 +18,26 @@
         <div>
             <hr />
         </div>
-        <div id="statusDiv">
-            <span id="statusBar">asdf</span>
+        <div class="text-center">
+            <div id="statusDiv">
+                <div class="bg-warning" style="height:20px">    </div>
+                <div id="attackStatusBar"></div>
+                <div class="bg-danger" id="damageStatusBar"></div>
+                <div id="messages"></div>
+                <div class="bg-info" id="experienceStatus"></div>
+            </div>
         </div>
         <div>
             <table class="table table-bordered">
                 <thead>
+                    <tr>
+                        <th id="levelIndicator"></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
                     <tr>
                         <th>Player Name</th>
                         <th>Weapon</th>
@@ -50,12 +64,33 @@
                                     <option value="lightningbolt">Lightningbolt</option>
                                 </select>
                             </span></td>
-                        <td><span id="banana"></span></td>
+                        <td><span id="playerMana"></span></td>
                         <td><span id="playerHealth"></span></td>
                         <td>
                             <button id="weaponAttack" style="color:black">Weapon</button>
                             <button id="spellCast" style="color:black">Spell</button>
+                            <button id="runAway" style="color:black">Run Away</button>
                         </td>
+                    </tr>
+                </tbody>
+                <thead>
+                    <tr>
+                        <th>Experience</th>
+                        <th>Attack Power</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span id="experienceDisplay"></span></td>
+                        <td><span id="playerPower"></span></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </tbody>
                 <thead>
