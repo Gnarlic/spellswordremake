@@ -31,7 +31,8 @@ $(document).ready(function () {
             defensePower : 10,
             speed : 4,
             escapeChance : 50,
-            experienceGained : 20
+            experienceGained : 25
+
         }
     ];
     var weapons = {
@@ -59,19 +60,22 @@ $(document).ready(function () {
     };
     var spells = {
         fireball : {
+            name : "Fireball",
             damage : 5,
             effectDuration : 2,
-            manaCost : 4
+            manaCost : 5
         },
         frostbeam : {
+            name : "Frostbeam",
             damage : 3,
             effectDuration : 1,
-            manaCost : 2
+            manaCost : 3
         },
         lightningBolt : {
+            name : "Lighting Bolt",
             damage : 6,
             effectDuration : 0,
-            manaCost : 3
+            manaCost : 4
         }
     };
     var playerStats = {
@@ -120,11 +124,8 @@ $(document).ready(function () {
         if (Math.floor(Math.random()*100)+1 < 51) {
             $("#attackStatusBar").removeClass("bg-success").addClass("bg-danger").text("Attack Failed!");
             enemyAttack();
-            heroHealthCheck();
             regenMana();
             updatePlayerMana();
-            updatePlayerHealth();
-            console.log("hey howdy hey");
             return;
         }
         enemy.currentHealth = enemy.currentHealth - (playerStats.player.attackPower + weapons[$("#weaponChoice").val()].attackModifier);
@@ -145,28 +146,24 @@ $(document).ready(function () {
         if(!isPlaying) {
             alert("Start new game");
             return;
-        }
+        };
         if (spells[$("#spellChoice").val()].manaCost > playerStats.player.currentMana) {
             clearStatusBar();
-            $("#messages").addClass("bg-warning").text("Not enough mana!");
+            updatePlayerMana();
+            $("#messages").addClass("bg-warning").text("Not enough mana! Use your weapon!");
             return;
-        }
+        };
         if (Math.floor(Math.random()*100)+1 < 51) {
-            $("#attackStatusBar").removeClass("bg-success").addClass("bg-danger").text("Attack Failed!");
+            $("#attackStatusBar").removeClass("bg-success").addClass("bg-danger").text("Spell Attack Failed!");
             enemyAttack();
-            playerStats.player.currentMana = playerStats.player.currentMana + playerStats.player.manaRegen 
-            - spells[$("#spellChoice").val()].manaCost;
             updatePlayerMana();
             updatePlayerHealth();
+            heroHealthCheck();
             return;
-        }
-            enemy.currentHealth = enemy.currentHealth -
-            (playerStats.player.attackPower + spells[$("#spellChoice").val()].damage);
-            $("#enemyHealth").text(enemy.currentHealth);
-            playerStats.player.currentMana = playerStats.player.currentMana + playerStats.player.manaRegen
-             - spells[$("#spellChoice").val()].manaCost;
+        };
+             spellAttackSuccess(spells[$("#spellChoice").val()].name);
              enemyHealthCheck();
-             updatePlayerMana();
+             enemyAttack();
         });
     
     function setUp () {
@@ -175,14 +172,27 @@ $(document).ready(function () {
     };
 
     function weaponAttackSuccess(weapon) {
-        $("#enemyHealth").text(enemy.currentHealth);
-            $("#attackStatusBar").removeClass("bg-danger").addClass("bg-success").text(`${weapon} attack Success!`);
+        updateEnemyHealth();
+        $("#attackStatusBar").removeClass("bg-danger").addClass("bg-success").text(`${weapon} attack Success!`);
     };
+
+    function spellAttackSuccess(spell) {
+        enemy.currentHealth = enemy.currentHealth -
+        (playerStats.player.attackPower + spells[$("#spellChoice").val()].damage);
+        manaDrain();
+        updatePlayerMana();
+        updateEnemyHealth();
+        clearStatusBar();
+        $("#attackStatusBar").addClass("bg-success").text(`${spell} attack Success!`)
+    };
+
+    function manaDrain() {
+        playerStats.player.currentMana = playerStats.player.currentMana + playerStats.player.manaRegen
+             - spells[$("#spellChoice").val()].manaCost;
+    }
 
     function readyGame() {
         setUp(enemies);
-        console.log(enemy.name);
-        console.log(playerStats.player.level);
         enemy.currentHealth = enemy.maxHealth;
         playerStats.player.currentHealth = playerStats.player.maxHealth;
         setAttackPower();
@@ -194,12 +204,13 @@ $(document).ready(function () {
         $("#enemyAttackPower").text(enemy.attackPower);
         $("#levelIndicator").text("Level: " + playerStats.player.level);
         $("#experienceDisplay").text(playerStats.player.experience + "/"+playerStats.player.experienceToNextLevel);
-        
+    
     };
 
     function setAttackPower() {
         $("#playerPower").text(playerStats.player.attackPower + weapons[$("#weaponChoice").val()].attackModifier);
-    }
+        $("#spellPower").text(playerStats.player.attackPower + spells[$("#spellChoice").val()].damage);
+    };
 
     function runAway() {
         if (Math.floor(Math.random()*100)+1 < enemy.escapeChance) {
@@ -211,17 +222,18 @@ $(document).ready(function () {
             clearStatusBar();
             $("#messages").addClass("bg-danger");
             $("#messages").text("Failed to run away!");
-            $("#damageStatusBar").text("You took " + enemy.attackPower + " points of damage.")
+            damageDisplay();
         } else {
             clearStatusBar();            
             readyGame();
             $("#messages").addClass("bg-success");
             $("#messages").text("You got away!");
-        }
+        };
     };
 
     function enemyOpportunityAttack() {
         playerStats.player.currentHealth = playerStats.player.currentHealth - enemy.attackPower;
+        heroHealthCheck();
         updatePlayerHealth();
     };
 
@@ -229,25 +241,29 @@ $(document).ready(function () {
         if (Math.floor(Math.random()*100)+1 > 65 ) {
             playerStats.player.currentHealth = 
             playerStats.player.currentHealth - enemy.attackPower;
-            console.log(playerStats.player.currentHealth);
-            $("#damageStatusBar").text(" You took " + enemy.attackPower + " points of damage");
+            heroHealthCheck();
+            updatePlayerHealth();
+            damageDisplay();
             
-        }
+        };
     };
 
+    function damageDisplay() {
+        $("#damageStatusBar").text(" You took " + enemy.attackPower + " points of damage");
+    }
+
     function clearStatusBar() {
-        $("#experienceStatus").text("");
+        $("#experienceStatus").empty();
         $("#messages").removeClass().empty();
         $("#attackStatusBar").removeClass().empty();+
         $("#damageStatusBar").empty();
-        //$("#statusDiv").empty();
-        //$("#statusDiv").removeClass();
-    }
+    };
 
     function heroHealthCheck() {
         if (playerStats.player.currentHealth <= 0) {
             clearStatusBar();
-            $("#playerHealth").text("0");
+            playerStats.player.currentHealth=0;
+            updatePlayerHealth();
             $("#messages").addClass("bg-danger");
             $("#messages").text(" You have died from the " + enemy.name + "'s attack. Press Start to play again!");
             isPlaying = false;
@@ -267,15 +283,15 @@ $(document).ready(function () {
             return false;
         } else {
             return true;
-        }
-    }
+        };
+    };
 
     function addExperience() {
         playerStats.player.experience = playerStats.player.experience + enemy.experienceGained;
         $("#experienceStatus").text("You have gained " + enemy.experienceGained + " experience points.");
         if (playerStats.player.experience >= playerStats.player.experienceToNextLevel) {
             levelUp();
-        }
+        };
     };
 
     function levelUp() {
@@ -285,19 +301,22 @@ $(document).ready(function () {
         playerStats.player.attackPower = Math.ceil(playerStats.player.attackPower *1.3);
         playerStats.player.experience = playerStats.player.experience - playerStats.player.experienceToNextLevel;
         playerStats.player.experienceToNextLevel = Math.ceil(playerStats.player.experienceToNextLevel * 1.3);
-        
         $("#experienceStatus").append(" You have leveled up!");
         if (playerStats.player.experience >= playerStats.player.experienceToNextLevel) {
             levelUp();
-        }
-    }
+        };
+    };
 
     function updatePlayerHealth() {
         $("#playerHealth").text(playerStats.player.currentHealth+"/"+playerStats.player.maxHealth);
-    }
+    };
 
     function updatePlayerMana() {
         $("#playerMana").text(playerStats.player.currentMana + "/" + playerStats.player.maxMana);
+    };
+
+    updateEnemyHealth() {
+        $("#enemyHealth").text(enemy.currentHealth+"/"+enemy.maxHealth);
     }
 
     function regenMana() {
@@ -307,8 +326,8 @@ $(document).ready(function () {
             playerStats.player.manaRegen;
         } else {
             playerStats.player.currentMana = playerStats.player.maxMana;
-        }
-    }
+        };
+    };
 
 });
 
