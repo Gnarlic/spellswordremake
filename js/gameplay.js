@@ -118,25 +118,19 @@ $(document).ready(function () {
             alert("Start new game");
             return;
         }
-        setAttackPower();
         clearStatusBar();
-        playerStats.player.currentMana = playerStats.player.currentMana + playerStats.player.manaRegen;
+        regenMana();
         if (Math.floor(Math.random()*100)+1 < 51) {
             $("#attackStatusBar").removeClass("bg-success").addClass("bg-danger").text("Attack Failed!");
             enemyAttack();
-            regenMana();
-            updatePlayerMana();
             return;
         }
-        enemy.currentHealth = enemy.currentHealth - (playerStats.player.attackPower + weapons[$("#weaponChoice").val()].attackModifier);
         weaponAttackSuccess(weapons[$("#weaponChoice").val()].name);
-        console.log(weapons[$("#weaponChoice").val()].attackModifier)
         if(!enemyHealthCheck()) {
             return;
         } else {
          enemyAttack();
          updatePlayerHealth();
-         regenMana();
          updatePlayerMana();
         };
          heroHealthCheck();      
@@ -172,6 +166,7 @@ $(document).ready(function () {
     };
 
     function weaponAttackSuccess(weapon) {
+        enemy.currentHealth = enemy.currentHealth - (playerStats.player.attackPower + weapons[$("#weaponChoice").val()].attackModifier);
         updateEnemyHealth();
         $("#attackStatusBar").removeClass("bg-danger").addClass("bg-success").text(`${weapon} attack Success!`);
     };
@@ -193,8 +188,8 @@ $(document).ready(function () {
 
     function readyGame() {
         setUp(enemies);
-        enemy.currentHealth = enemy.maxHealth;
-        playerStats.player.currentHealth = playerStats.player.maxHealth;
+        updateEnemyHealth();
+        updatePlayerHealth();
         setAttackPower();
         $("#enemyType").text(enemy.name);
         $("#enemyHealth").text(enemy.currentHealth);
@@ -315,7 +310,7 @@ $(document).ready(function () {
         $("#playerMana").text(playerStats.player.currentMana + "/" + playerStats.player.maxMana);
     };
 
-    updateEnemyHealth() {
+    function updateEnemyHealth() {
         $("#enemyHealth").text(enemy.currentHealth+"/"+enemy.maxHealth);
     }
 
