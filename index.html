@@ -20,7 +20,7 @@
         </div>
         <div class="text-center">
             <div id="statusDiv">
-                
+
                 <div id="attackStatusBar"></div>
                 <div class="bg-danger" id="damageStatusBar"></div>
                 <div id="messages"></div>
@@ -61,11 +61,22 @@
                                 <select name="spells" id="spellChoice">
                                     <option value="fireball">Fireball</option>
                                     <option value="frostbeam">Frostbeam</option>
-                                    <option value="lightningbolt">Lightningbolt</option>
+                                    <option value="lightningBolt">Lightningbolt</option>
                                 </select>
                             </span></td>
-                        <td><span id="playerMana"></span></td>
-                        <td><span id="playerHealth"></span></td>
+                        <td><div id="playerMana" style="width:100%;background-color:grey">
+                            <div id="playerManaBar"
+                                style="width:10%;height:30px;background-color: blue;text-align:center;line-height:30px;color:white">
+
+                            </div></td>
+                        <td>
+                            <div id="playerHealth" style="width:100%;background-color:grey">
+                                <div id="playerHealthBar"
+                                    style="width:10%;height:30px;background-color: green;text-align:center;line-height:30px;color:white">
+
+                                </div>
+                            </div>
+                        </td>
                         <td>
                             <button id="weaponAttack" style="color:black">Weapon</button>
                             <button id="spellCast" style="color:black">Spell</button>
@@ -85,7 +96,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><span id="experienceDisplay"></span></td>
+                        <td>
+                            <div id="progressBar" style="width:100%;background-color:grey">
+                                <div id="myBar"
+                                    style="width:10%;height:30px;background-color: #CAC700;text-align:center;line-height:30px;color:white">
+
+                                </div>
+                            </div>
+                        </td>
                         <td><span id="playerPower"></span></td>
                         <td><span id="spellPower"></span></td>
                         <td></td>
@@ -109,12 +127,20 @@
                         <td><span id="enemyAttackPower"></span></td>
                         <td></td>
                         <td></td>
-                        <td><span id="enemyHealth"></span></td>
+                        <td>
+                            <div id="enemyHealth" style="width:100%;background-color:grey">
+                                <div id="enemyHealthBar"
+                                    style="width:100%;height:30px;background-color: red;text-align:center;line-height:30px;color:white">
+                        </td>
                         <td></td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        <div>
+            <button id="progressButton">advance bar</button>
+        </div>
+
     </div>
 
 
@@ -122,5 +148,6 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/gameplay.js"></script>
 </body>
+
 
 </html>
