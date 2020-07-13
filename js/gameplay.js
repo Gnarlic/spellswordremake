@@ -116,6 +116,11 @@ $(document).ready(function () {
         runAway();
     });
 
+    $("#progressButton").click(function (){
+        levelUp();
+        readyGame();
+    })
+
     $("#weaponAttack").click(function (){
         if(!isPlaying) {
             alert("Start new game");
@@ -380,5 +385,14 @@ $(document).ready(function () {
             $("#playerManaBar").css("width", width+"%");
             $("#playerManaBar").text(playerStats.player.currentMana + "/" + playerStats.player.maxMana);
         }
+
+        $("#testButton").click(function (){
+            var width = 10;
+            var speed = playerStats.player.speed + weapons[$("#weaponChoice").val()].speedModifier;
+            console.log(speed);
+            $("#timerTestBar").css("width", width+"%");
+            $("#timerTestBar").text("test");
+
+        });
 });
 
