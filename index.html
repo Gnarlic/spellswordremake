@@ -88,17 +88,17 @@
                 </tbody>
                 <thead>
                     <tr>
-                        <th>Experience</th>
+                        <th colspan="2">Experience</th>
                         <th>Attack Power</th>
                         <th>Spell Power</th>
+                        <th>Speed</th>
                         <th></th>
-                        <th></th>
-                        <th></th>
+                        
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>
+                        <td colspan="2">
                             <div id="progressBar" style="width:100%;background-color:grey">
                                 <div id="myBar"
                                     style="width:10%;height:30px;background-color: #CAC700;text-align:center;line-height:30px;color:white">
@@ -108,9 +108,36 @@
                         </td>
                         <td><span id="playerPower"></span></td>
                         <td><span id="spellPower"></span></td>
+                        <td><span id="playerSpeed"></span></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
+                        
+                    </tr>
+                </tbody>
+                <thead>
+                    <th colspan="6" class="text-center">
+                        Attack Timer
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="6" id="timerTest" style="width:100%;background-color:grey">
+                            <div id="timerTestBar"
+                                style="width:0%;height:30px;background-color: purple;text-align:center;line-height:30px;color:white">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <thead>
+                    <th colspan="6" class="text-center">
+                        Enemy Attack Timer
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="6" id="enemyTimer" style="width:100%;background-color:grey">
+                            <div id="enemyTimerBar" style="width:0%;height:30px;background-color: violet;text-align:center;line-height:30px;color:white">
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
                 <thead>
@@ -118,7 +145,7 @@
                         <th>Enemy Type</th>
                         <th>Attack Power</th>
                         <th></th>
-                        <th></th>
+                        <th>Speed</th>
                         <th>Enemy Health</th>
                         <th></th>
                     </tr>
@@ -128,7 +155,7 @@
                         <td><span id="enemyType"></span></td>
                         <td><span id="enemyAttackPower"></span></td>
                         <td></td>
-                        <td></td>
+                        <td><span id="enemySpeed"></span></td>
                         <td>
                             <div id="enemyHealth" style="width:100%;background-color:grey">
                                 <div id="enemyHealthBar"
@@ -145,13 +172,7 @@
         <div>
             <button id="testButton">advance bar</button>
         </div>
-        <div id="timerBarDiv">
-            <div id="timerTest" style="width:100%;background-color:grey">
-                <div id="timerTestBar"
-                    style="width:100%;height:30px;background-color: purple;text-align:center;line-height:30px;color:white">
-                </div>
-            </div>
-        </div>
+
     </div>
 
 
